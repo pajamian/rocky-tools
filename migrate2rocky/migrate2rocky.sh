@@ -551,6 +551,10 @@ generate_rpm_info() {
 }
 
 package_swaps() {
+    # Prevent the script from being killed mid-migration due to a remote link
+    # dropping.
+    trap '' HUP PIPE
+
     # Save off any subscription-manger keys, just in case.
     if ( shopt -s failglob dotglob; : "$sm_ca_dir"/* ) 2>/dev/null ; then
 	tmp_sm_ca_dir=$tmp_dir/sm-certs
