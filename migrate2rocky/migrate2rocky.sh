@@ -191,7 +191,10 @@ exit_clean () {
 
 pre_check () {
     if [[ -e /etc/rhsm/ca/katello-server-ca.pem ]]; then
-	exit_message "Migration from Katello-modified systems is not supported by migrate2rocky."
+	    exit_message "Migration from Katello-modified systems is not supported by migrate2rocky. See the README file for details."
+    fi
+    if [[ -e /etc/salt/minion.d/susemanager.conf ]]; then
+        exit_message "Migration from Uyuni/SUSE Manager-modified systems is not supported by migrate2rocky. See the README file for details."
     fi
 }
 
@@ -265,6 +268,9 @@ repoinfo () {
     fi
     declare -gA repoinfo_results=()
     while IFS=" :" read -r name val; do
+	if [[ ! ( $name || $val) ]]; then
+		continue
+	fi
 	if [[ -z $name ]]; then
 	    repoinfo_results[$prev]+=" $val"
 	else
@@ -432,6 +438,7 @@ collect_system_info () {
 	[rocky-indexhtml]=redhat-indexhtml
 	[rocky-repos]="$baseos_filename"
 	[rocky-logos]=system-logos
+	[rocky-logos-httpd]=system-logos-httpd
 	[rocky-gpg-keys]="$baseos_gpgkey"
 	[rocky-release]=system-release
     )
