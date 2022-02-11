@@ -618,6 +618,7 @@ collect_system_info () {
 	[centos:powertools]=https://dl.rockylinux.org/vault/centos/8.5.2111/PowerTools/$ARCH/os/
 	[centos:extras]=https://dl.rockylinux.org/vault/centos/8.5.2111/extras/$ARCH/os/
 	[centos:devel]=https://dl.rockylinux.org/vault/centos/8.5.2111/Devel/$ARCH/os/
+	[centos:centosplus]=https://dl.rockylinux.org/pub/rocky/8/plus/$ARCH/os/
     )
 
     # In case migration is attempted from very old CentOS (before the repository
