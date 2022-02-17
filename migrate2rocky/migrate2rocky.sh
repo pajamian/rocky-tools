@@ -691,12 +691,12 @@ collect_system_info () {
 
         if [[ $r == "baseos" ]]; then
             local baseos_filename=system-release
-            if [[ ! ${repoinfo_results[Repo-managed]} ]]; then
-                baseos_filename="${repoinfo_results[Repo-filename]}"
-            fi
+#            if [[ ! ${repoinfo_results[Repo-managed]} ]]; then
+#                baseos_filename="${repoinfo_results[Repo-filename]}"
+#            fi
             local baseos_gpgkey="${repoinfo_results[Repo-gpgkey]}"
         fi
-        if [[ ${repoinfo_results[Repo-managed]} ]]; then
+        if [[ ${repoinfo_results[Repo-filename]} == '/etc/yum.repos.d/Server.repo' ]]; then
             managed_repos+=("${repo_map[$r]}")
         fi
     done
